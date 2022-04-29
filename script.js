@@ -58,7 +58,6 @@ Image.allImages.push(new Image('Water-can', './images/water-can.jpg'));
 Image.allImages.push(new Image('Wine-glass', './images/wine-glass.jpg'));
 
 
-//Get three new images on reset
   function getThreeImages(){
     const cantUse = [pic1, pic2, pic3];
      if(cantUse.includes(pic1)){
@@ -78,14 +77,12 @@ Image.allImages.push(new Image('Wine-glass', './images/wine-glass.jpg'));
       cantUse.push[pic3];
   }
 
-  //Render images to the html element
 function renderImage(){
   pic1.renderImage(firstPicElement, firstPicTitle);
   pic2.renderImage(secondPicElement, secondPicTitle);
   pic3.renderImage(thirdPicElement, thirdPicTitle);
 }
 
-  //Count and change images on click. 
   function handleClick(click){
     const imageClicked = click.target.id;
     if(imageClicked === 'pic1' || imageClicked === 'pic2' || imageClicked === 'pic3'){
