@@ -84,6 +84,7 @@ function renderImage(){
 }
 
 
+
 function putImagesInStorage(){
   let stringArray = JSON.stringify(Image.allImages)
   if (stringArray = []){
@@ -119,6 +120,8 @@ function handleClick(click){
     if (count === 5){
       for(let img of Image.allImages){
         console.log (img.name + " was clicked on" + img.clicks + " was viewed" + img.views);
+
+  
       }
     }
   }
