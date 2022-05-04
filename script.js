@@ -1,13 +1,13 @@
-'use script'
+'use strict'
 
 const picContainerElement = document.getElementById
 ('center');
 const firstPicElement = document.getElementById
-('p1');
+('pic1');
 const secondPicElement = document.getElementById
-('p2');
+('pic2');
 const thirdPicElement = document.getElementById
-('p3');
+('pic3');
 const firstPicTitle = document.getElementById
 ('title1');
 const secondPicTitle = document.getElementById
