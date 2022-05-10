@@ -2,20 +2,23 @@ body{
     background-color: rgb(117, 106, 108);
 }
 main{
-    background-color: rgb(235, 226, 226);
+   background-color: rgb(235, 226, 226);
     display: flex;
     justify-content: space-evenly;
   }
   img{
     height:100px;
     width: 100px;
-    margin-left: 100px;
-margin-right: 100px;
+    margin-left: 10px;
+margin-right: 10px;
 }
  header{   
      background-color:rgb(206, 194, 194); 
      text-align: center;
      margin-left: 380px;
      margin-right: 320px
+     
+ }
+ canvas{
      
  }

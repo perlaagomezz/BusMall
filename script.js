@@ -9,11 +9,11 @@ const secondPicElement = document.getElementById
 const thirdPicElement = document.getElementById
 ('pic3');
 const firstPicTitle = document.getElementById
-('title1');
+('imgtitle1');
 const secondPicTitle = document.getElementById
-('title2');
+('imgtitle2');
 const thirdPicTitle = document.getElementById
-('title3');
+('imgtitle3');
 
 let count = 0
 
@@ -92,7 +92,6 @@ function putImagesInStorage(){
   }
   else (localStorage.setItem('image', stringArray))
 }
-// console.log(putImagesInStorage)
 function getImagesFromStorage(){
   let storedImage = localStorage.getItem('image')
   if(storedImage){
@@ -104,45 +103,116 @@ function getImagesFromStorage(){
   }
 }
 
-function handleClick(click){
-  const imageClicked = click.target.id;
+function makeChart(){
+  const ctx = document.getElementById('myChart').getContext('2d');
+
+  let imageNames = [];
+  let imageClicks = [];
+  let imageViews = [];
+
+  for(let image of Image.allImages){
+    imageNames.push(image.name);
+    imageClicks.push(image.clicks);
+    imageViews.push(image.views);
+  }
+
+  const myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: imageNames,
+          datasets: [{
+              label: '# of Votes',
+              data: imageClicks,
+              backgroundColor: [
+                  'rgba(0, 0, 1, 12)',
+                  'rgba(0, 11, 235,12)',
+                  'rgba(0, 12, 86, 12)',
+                  'rgba(0, 13, 192, 12)',
+                  'rgba(0, 14, 255, 12)',
+                  'rgba(0, 15, 64, 12)'
+              ],
+              borderColor: [
+                  'rgba(255, 70, 132, 1)',
+                  'rgba(54, 71, 235, 1)',
+                  'rgba(255, 72, 86, 1)',
+                  'rgba(75, 73, 192, 1)',
+                  'rgba(153, 74, 255, 1)',
+                  'rgba(255, 67, 64, 1)'
+              ],
+              borderWidth: 1
+          },
+          {
+            label: '# of Views',
+            data: imageViews,
+            backgroundColor: [
+                'rgba(255, 99, 132, 3)',
+                'rgba(54, 162, 235, 3)',
+                'rgba(255, 206, 86, 3)',
+                'rgba(75, 192, 192, 3)',
+                'rgba(153, 102, 255, 3)',
+                'rgba(255, 159, 64, 3)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+}
+
+function removeImages(){
+
+  document.getElementById('img1').style.display = 'none';
+  document.getElementById('img2').style.display = 'none';
+  document.getElementById('img3').style.display = 'none';
+}
+
+ function handleClick(e){
+  let imageClicked = e.target.id;
   if(imageClicked === 'pic1' || imageClicked === 'pic2' || imageClicked === 'pic3'){
     count++;
-      if(imageClicked === 'pic1'){
-        pic1.clicks++;
-    }
-      if(imageClicked === 'pic2'){
-        pic2.clicks++;
-    } 
-      if(imageClicked === 'pic3'){
-        pic3.clicks++;
-    }
-    if (count === 5){
-      for(let img of Image.allImages){
-        console.log (img.name + " was clicked on" + img.clicks + " was viewed" + img.views);
-
-  
-      }
-    }
+  }
+  if(imageClicked === 'pic1'){
+    pic1.clicks++;
+  }
+  if (imageClicked === 'pic2'){
+    pic2.clicks++;
+  }
+  if (imageClicked = 'pic3'){
+    pic3.clicks++;
   }
   getThreeImages();
-
   renderImage();
-  
-putImagesInStorage()
-
-
+  if (count === 10){
+    for(let img of Image.allImages){
+      removeImages();
+      let h3elm = document.createElement('h3')
+      picContainerElement.appendChild(h3elm)
+      let resultsButton = document.createElement ('button')
+      // resultsButton.textContent = 'Survey Results'
+      // resultsButton.id = 'results'
+      // h3elm.appendChild(resultsButton)
+      resultsButton.onclick = makeChart
+      makeChart();
+  }
 }
-function clickTest(){
-  console.log("click")
+  putImagesInStorage();
 }
-picContainerElement.addEventListener('click', handleClick)
+picContainerElement.addEventListener('click', handleClick);
 
-getImagesFromStorage()
-
+getImagesFromStorage();
 getThreeImages();
-
 renderImage();
-
-
- 
